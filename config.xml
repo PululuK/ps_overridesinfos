@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>ps_overridesinfos</name>
+	<displayName><![CDATA[Prestashop overrides informations]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Information on modules which contain overrides or which have been overridden.]]></description>
+	<author><![CDATA[PululuK]]></author>
+	<tab><![CDATA[analytics_stats]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>

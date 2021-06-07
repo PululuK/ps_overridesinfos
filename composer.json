@@ -1,0 +1,19 @@
+{
+    "name": "pululuk/ps_overridesinfos",
+    "description": "Prestashop overrides informations",
+    "authors": [
+        {
+            "name": "PululuK",
+            "email": "pululuandre@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PrestaShop\\Module\\Ps_overridesinfos\\": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "prepend-autoloader": false
+    },
+}
