@@ -1,12 +1,18 @@
 <?php
 
+
+declare(strict_types=1);
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 class Ps_overridesinfos extends Module
 {    
-    public $tabs ;
+    protected $config_form = true;
+    public $tabs;
 
     public function __construct()
     {
@@ -41,6 +47,15 @@ class Ps_overridesinfos extends Module
     public function uninstall()
     {
         return parent::uninstall();
+    }
+    
+    public function getContent()
+    {
+        $tabInfos = $this->getTabsInfos();
+        
+        Tools::redirectAdmin(
+            $this->context->link->getAdminLink($tabInfos['class_name'])
+        );
     }
     
     public function getTabsInfos(): array

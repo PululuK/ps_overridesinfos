@@ -1,0 +1,7 @@
+ps_overridesinfos_list:
+    path: ps_overridesinfos/list
+    methods: [GET]
+    defaults:
+        _controller: 'PrestaShop\Module\Ps_overridesinfos\Controller\Admin\OverridesInfosController::indexAction'
+        _legacy_controller: 'AdminOverridesInfosController'
+        _legacy_link: 'AdminOverridesInfosController'
