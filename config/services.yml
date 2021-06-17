@@ -1,15 +1,10 @@
 services: 
   _defaults: 
     public: true
-#  ps_overridesinfos.adapter.presenter.module: 
-#    class: PrestaShop\Module\Ps_overridesinfos\Services\ModulePresenter
-#    decorates: prestashop.adapter.presenter.module
-#    arguments: ['@ps_overridesinfos.adapter.presenter.module.inner']
 
-  ps_overridesinfos.module.manager: 
-    class: PrestaShop\Module\Ps_overridesinfos\Services\ModuleManager
-    decorates: prestashop.module.manager
+  ps_overridesinfos.adapter.module.manager: 
+    class: PrestaShop\Module\Ps_overridesinfos\Adapter\ModuleManager
     arguments: 
-        - '@ps_overridesinfos.module.manager.inner'
+        - '@prestashop.module.manager'
         - '@prestashop.core.admin.module.repository'
         - '@prestashop.adapter.admin.data_provider.module'

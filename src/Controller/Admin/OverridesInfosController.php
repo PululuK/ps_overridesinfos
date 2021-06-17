@@ -23,7 +23,7 @@ class OverridesInfosController extends ModuleAbstractController
     public function indexAction()
     {
         return $this->render(
-            '@Modules/ps_overridesinfos/views/templates/admin/card_list_overrides.html.twig',
+            '@Modules/ps_overridesinfos/views/templates/admin/overrides.html.twig',
             $this->getOverridesPageData()
         );
     }
@@ -35,7 +35,7 @@ class OverridesInfosController extends ModuleAbstractController
             return $modulePresenter->presentCollection($modules);
         };
 
-        $moduleManager = $this->get('ps_overridesinfos.module.manager');
+        $moduleManager = $this->get('ps_overridesinfos.adapter.module.manager');
         $modules = $moduleManager->getModulesWithOverrides($modulesPresenterCallback);
 
         return [
@@ -43,7 +43,7 @@ class OverridesInfosController extends ModuleAbstractController
             'layoutHeaderToolbarBtn' => $this->getToolbarButtons(),
             'layoutTitle' => $this->trans('Module notifications', 'Admin.Modules.Feature'),
             'help_link' => $this->generateSidebarLink('AdminModules'),
-            'module' => $modules->overrides,
+            'modules' => $modules->overrides,
             'requireAddonsSearch' => false,
             'requireBulkActions' => false,
             'requireFilterStatus' => false,

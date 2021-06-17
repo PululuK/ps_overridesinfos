@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Ps_overridesinfos\Services;
+namespace PrestaShop\Module\Ps_overridesinfos\Adapter;
 
 use PrestaShop\PrestaShop\Adapter\Module\AdminModuleDataProvider;
-use PrestaShop\Module\Ps_overridesinfos\Services\ModulePresenter;
+use PrestaShop\Module\Ps_overridesinfos\Adapter\Module;
 use PrestaShop\PrestaShop\Core\Addon\AddonManagerInterface;
-use Module as LegacyModule;
 use PrestaShop\PrestaShop\Core\Addon\AddonsCollection;
 use PrestaShop\PrestaShop\Core\Addon\Module\ModuleRepository;
-use Tools;
 
 
 class ModuleManager {
@@ -65,7 +63,7 @@ class ModuleManager {
          * @var \PrestaShop\PrestaShop\Adapter\Module\Module
          */
         foreach ($installedProducts as $installedProduct) {
-            $installedProduct = (new ModulePresenter($installedProduct))->getModuleN();
+            $installedProduct = (new Module($installedProduct))->getModule();
             if ($installedProduct->attributes->get('hasOverrides')) {
                 $modules->overrides[] = (object) $installedProduct;
             }

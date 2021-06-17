@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Ps_overridesinfos\Services;
+namespace PrestaShop\Module\Ps_overridesinfos\Adapter;
 
 use PrestaShop\PrestaShop\Core\Addon\Module\ModuleInterface;
-
 use Module as LegacyModule;
 use Tools;
 
 
-class ModulePresenter{
+class Module{
 
     private $moduleAdapter;
     private $moduleName = null;
@@ -36,26 +35,9 @@ class ModulePresenter{
         }
     }
 
-    public function getModuleN(){
+    public function getModule(){
         return $this->moduleAdapter;
     }
-
-    public function __call($method, $args)
-    {
-        if (isset($this->moduleAdapter->$method)) {
-            $moduleAdapterFunction = $this->moduleAdapter->$method;
-            return call_user_func_array($moduleAdapterFunction, $args);
-        }
-    }
-
-    public function __get(string $attribute)
-    {
-        if (isset($this->moduleAdapter->$attribute)) {
-            $this->{$attribute} = $this->moduleAdapter->$attribute;
-            return $this->{$attribute};
-        }
-    }
-
     
     /*
      * Check if module contains overrides or has been overrided
@@ -64,7 +46,7 @@ class ModulePresenter{
      */
     public function hasOverrides(): bool {
         $overridesFiles = array_filter($this->getOverrideInfos());
-        return empty($overridesFiles);
+        return !empty($overridesFiles);
     }
     
     public function getOverrideInfos(): array
@@ -137,36 +119,5 @@ class ModulePresenter{
 
         return $overridesList;
         
-    }
-
-    public function onInstall(){
-
-    }
-
-    public function onUninstall(){
-
-    }
-
-    public function onEnable(){
-
-    }
-
-    public function onDisable(){
-
-    }
-
-    public function onMobileEnable(){
-
-    }
-
-    public function onMobileDisable() {
-
-    }
-
-    public function onReset() {
-
-    }
-    public function onUpgrade($version) {
-
     }
 }
