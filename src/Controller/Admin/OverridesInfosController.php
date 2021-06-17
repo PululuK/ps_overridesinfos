@@ -30,7 +30,7 @@ class OverridesInfosController extends ModuleAbstractController
     
     protected function getOverridesPageData()
     {
-        $modulePresenter = $this->get('ps_overridesinfos.adapter.presenter.module');
+        $modulePresenter = $this->get('prestashop.adapter.presenter.module');
         $modulesPresenterCallback = function (AddonsCollection &$modules) use ($modulePresenter) {
             return $modulePresenter->presentCollection($modules);
         };
