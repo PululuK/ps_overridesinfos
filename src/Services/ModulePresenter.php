@@ -12,7 +12,7 @@ use Tools;
 class ModulePresenter {
 
     private $moduleAdapter;
-    private $moduleName;
+    private $moduleName = null;
     
     private $attributes_default;
 
@@ -22,13 +22,21 @@ class ModulePresenter {
     public function __construct(ModuleInterface $moduleAdapter)
     {
         $this->moduleAdapter = $moduleAdapter;
-        $this->moduleName = $moduleAdapter->attributes->get('name');
 
         if($this->moduleAdapter->getInstance() instanceof LegacyModule) {
+            $this->moduleName = $moduleAdapter->attributes->get('name');
             $this->moduleAdapter->attributes->set(
                 'overrideInfos',
                 $this->getOverrideInfos()
             );
+        }
+    }
+
+    public function __call($method, $args)
+    {
+        if (isset($this->moduleAdapter->$method)) {
+            $moduleAdapterFunction = $this->moduleAdapter->$method;
+            return call_user_func_array($moduleAdapterFunction, $args);
         }
     }
     

@@ -12,3 +12,4 @@ services:
     arguments: 
         - '@ps_overridesinfos.module.manager.inner'
         - '@prestashop.core.admin.module.repository'
+        - '@prestashop.adapter.admin.data_provider.module'
