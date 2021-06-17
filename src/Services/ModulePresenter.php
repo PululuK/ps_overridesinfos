@@ -5,23 +5,22 @@ declare(strict_types=1);
 namespace PrestaShop\Module\Ps_overridesinfos\Services;
 
 use PrestaShop\PrestaShop\Core\Addon\Module\ModuleInterface;
+
 use Module as LegacyModule;
 use Tools;
 
 
-class ModulePresenter {
+class ModulePresenter{
 
     private $moduleAdapter;
     private $moduleName = null;
     
-    private $attributes_default;
-
     /**
      * @param ModuleInterface $moduleAdapter
      */
     public function __construct(ModuleInterface $moduleAdapter)
     {
-        $this->moduleAdapter = $moduleAdapter;
+        $this->moduleAdapter = $moduleAdapter;        
 
         if($this->moduleAdapter->getInstance() instanceof LegacyModule) {
             $this->moduleName = $moduleAdapter->attributes->get('name');
@@ -29,7 +28,16 @@ class ModulePresenter {
                 'overrideInfos',
                 $this->getOverrideInfos()
             );
+
+            $this->moduleAdapter->attributes->set(
+                'hasOverrides',
+                $this->hasOverrides()
+            );
         }
+    }
+
+    public function getModuleN(){
+        return $this->moduleAdapter;
     }
 
     public function __call($method, $args)
@@ -39,6 +47,15 @@ class ModulePresenter {
             return call_user_func_array($moduleAdapterFunction, $args);
         }
     }
+
+    public function __get(string $attribute)
+    {
+        if (isset($this->moduleAdapter->$attribute)) {
+            $this->{$attribute} = $this->moduleAdapter->$attribute;
+            return $this->{$attribute};
+        }
+    }
+
     
     /*
      * Check if module contains overrides or has been overrided
@@ -108,6 +125,8 @@ class ModulePresenter {
     public function getOverridesList(): array
     {
         $overridesList = [];
+
+        return [];
         $overrideDir = $this->getLocalPath() . 'override';
 
         if(is_dir($overrideDir)) {
@@ -118,5 +137,36 @@ class ModulePresenter {
 
         return $overridesList;
         
+    }
+
+    public function onInstall(){
+
+    }
+
+    public function onUninstall(){
+
+    }
+
+    public function onEnable(){
+
+    }
+
+    public function onDisable(){
+
+    }
+
+    public function onMobileEnable(){
+
+    }
+
+    public function onMobileDisable() {
+
+    }
+
+    public function onReset() {
+
+    }
+    public function onUpgrade($version) {
+
     }
 }

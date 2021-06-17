@@ -65,8 +65,8 @@ class ModuleManager {
          * @var \PrestaShop\PrestaShop\Adapter\Module\Module
          */
         foreach ($installedProducts as $installedProduct) {
-            $installedProduct = new ModulePresenter($installedProduct);
-            if (!$installedProduct->hasOverrides()) {
+            $installedProduct = (new ModulePresenter($installedProduct))->getModuleN();
+            if ($installedProduct->attributes->get('hasOverrides')) {
                 $modules->overrides[] = (object) $installedProduct;
             }
         }

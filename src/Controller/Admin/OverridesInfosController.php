@@ -43,7 +43,7 @@ class OverridesInfosController extends ModuleAbstractController
             'layoutHeaderToolbarBtn' => $this->getToolbarButtons(),
             'layoutTitle' => $this->trans('Module notifications', 'Admin.Modules.Feature'),
             'help_link' => $this->generateSidebarLink('AdminModules'),
-            'modules' => $modules->overrides,
+            'module' => $modules->overrides,
             'requireAddonsSearch' => false,
             'requireBulkActions' => false,
             'requireFilterStatus' => false,
